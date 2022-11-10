@@ -16,12 +16,30 @@ const pool = new Pool({
   max: 10, // max queries at once
   idleTimeoutMillis: 30000 // 30 seconds to try to connect before cancelling query
 });
+
 pool.on('connect', () => {
   console.log('postgresql is connected!');
 });
 
 pool.on('error', (error) => {
   console.log('error in postgres pool.', error);
+})
+
+// end pg / pool
+
+app.get('/db', (req, res) => {
+
+  const queryText = `SELECT * FROM tasks`;
+
+  pool.query(queryText)
+    .then( (result) => {
+      res.send(result.rows);
+    })
+    .catch( (error) => {
+      console.log('error in GET query');
+      console.log(error);
+      res.sendStatus(500);
+    })
 })
 
 app.listen(PORT, () => {
