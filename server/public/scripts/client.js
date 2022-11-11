@@ -104,6 +104,11 @@ function validateInput(task) {
     return false;
   }
 
+  if (task.name.length > 40) {
+    alert('Task name must be 40 characters or less.')
+    return false;
+  }
+
   return true;
 }
 
