@@ -26,10 +26,11 @@ function renderTasks(tasks) {
   let listTable = $( '#list-table' )
 
   for (let task of tasks) {
+    console.log(task);
     listTable.append(`
       <tr>
         <td><button class="complete-task" data-id="${task.id}">&#10003;</button></td>
-        <td>${task.name}</td>
+        <td>${task.task_name}</td>
         <td>${task.priority}</td>
       </tr>
     `)
@@ -55,7 +56,20 @@ function addTask() {
     return false;
   }
 
-  console.log(task);
+  $.ajax({
+    method: 'POST',
+    url: '/tasks',
+    data: task })
+    .then( function () {
+      console.log('AJAX POST successful');
+      getTasks();
+    })
+    .catch( function (error) {
+      console.log(('AJAX POST error'));
+      console.log(error);
+      return false;
+    })
+
   emptyInputs();
 }
 

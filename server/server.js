@@ -42,6 +42,25 @@ app.get('/tasks', (req, res) => {
     })
 })
 
+app.post('/tasks', (req, res) => {
+  const task = req.body
+  const queryText = `
+  INSERT INTO tasks
+    (task_name, priority, completed)
+  VALUES
+    ($1, $2, $3);`
+
+  pool.query(queryText, [task.name, task.priority, task.completed])
+    .then( (response) => {
+      console.log('task added successfully');
+      res.sendStatus(201)
+    })
+    .catch( (error) => {
+      console.log('error in POST query');
+      res.sendStatus(500);
+    })
+})
+
 app.listen(PORT, () => {
   console.log('listening on port', PORT);
 })
