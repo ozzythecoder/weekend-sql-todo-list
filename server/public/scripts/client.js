@@ -124,5 +124,17 @@ function emptyInputs() {
 function deleteTask() {
   let id = $( this ).data('id')
 
-  console.log('in delete task for task with id', id);
+  console.log('in deletetask for task with id', id);
+
+  $.ajax({
+    method: 'DELETE',
+    url: '/tasks/' + id
+  })
+  .then(function() {
+    console.log('Ajax delete successful');
+    getTasks();
+  })
+  .catch(function () {
+    console.log('Error in Ajax delete');
+  })
 }
