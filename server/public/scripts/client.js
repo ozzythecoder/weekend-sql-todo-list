@@ -20,26 +20,31 @@ function getTasks() {
   .catch(function (error) {
     console.log('error in AJAX GET:', error);
   })
-}
+} // end getTasks()
 
 function renderTasks(tasks) {
+  clearTable();
+
   let listTable = $( '#list-table' )
 
   for (let task of tasks) {
     console.log(task);
     listTable.append(`
       <tr>
-        <td><button class="complete-task" data-id="${task.id}">&#10003;</button></td>
+        <td><button class="complete-task-btn" data-id="${task.id}">&#10003;</button></td>
         <td>${task.task_name}</td>
         <td>${task.priority}</td>
       </tr>
     `)
   }
 
-}
+} // end renderTasks()
+
+function clearTable() { $( '#list-table ').empty() };
 
 function getEventListeners() {
   $( '#submit-task-btn' ).on('click', addTask)
+  $( '#list-table' ).on('click', '.complete-task-btn', completeTask)
 }
 
 function addTask() {
@@ -71,7 +76,24 @@ function addTask() {
     })
 
   emptyInputs();
-}
+} // end addTask()
+
+function completeTask() {
+  let id = $( this ).data('id')
+
+  $.ajax({
+    method: 'PUT',
+    url: '/tasks/' + id
+  })
+  .then(function() {
+    console.log('AJAX PUT successful');
+    getTasks();
+  })
+  .catch(function (error) {
+    console.log('AJAX PUT error');
+    console.log(error);
+  })
+} // end completeTask()
 
 function emptyInputs() {
   $( '#task-name-in' ).val('')
