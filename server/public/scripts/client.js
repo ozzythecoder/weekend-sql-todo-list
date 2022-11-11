@@ -39,15 +39,16 @@ function renderTasks(tasks) {
 
     listTable.append(`
       <tr class="${complete ? 'completed-row' : ''}">
-        <td><button class="complete-task-btn"
+        <td class="complete-cell">
+        <button class="complete-task-btn"
           data-completed="${complete}"
           data-id="${id}"
           ${complete ? 'disabled' : ''}>
             &#10003;
           </button></td>
-        <td>${task.task_name}</td>
-        <td>${priorityText[priority]}</td>
-        <td><button class="delete-task-btn"
+        <td class="task-cell">${task.task_name}</td>
+        <td class="priority-cell">${priorityText[priority]}</td>
+        <td class="delete-cell"><button class="delete-task-btn"
           data-id="${id}">Delete</button></td>
       </tr>
     `)

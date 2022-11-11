@@ -10,29 +10,35 @@
   <title>The Completionator</title>
 </head>
 <body>
-  <h1>The Completionator</h1>
-  <p>Let's get some tasks done</p>
-  <input type="text" id="task-name-in" placeholder="Task Name" />
-  <select id="priority-in">
-    <option value="" selected disabled hidden>Priority</option>
-    <option value="1">High</option>
-    <option value="2">Medium</option>
-    <option value="3">Low</option>
-  </select>
-  <button id="submit-task-btn">Add Task</button>
-  <button id="test-btn">Test</button>
+  <div id="container">
+      <div id="content">
+      <h1 class="heading-text">The Completionator</h1>
+      <h3 class="heading-text">Let's get some tasks done!</h3>
+      <div id="add-task-form">
+        <input type="text" id="task-name-in" placeholder="Task Name" />
+        <select id="priority-in">
+          <option value="" selected disabled hidden>Priority</option>
+          <option value="1">High</option>
+          <option value="2">Medium</option>
+          <option value="3">Low</option>
+        </select>
+        <button id="submit-task-btn">Add Task</button>
+        <button id="test-btn">Test</button>
+      </div>
 
-  <div id="task-list">
-    <table>
-      <thead>
-        <th>Complete</th>
-        <th>Task</th>
-        <th>Priority</th>
-        <th>Delete</th>
-      </thead>
-      <tbody id="list-table">
-      </tbody>
-    </table>
+      <div id="task-list">
+        <table>
+          <thead>
+            <th class="complete-cell"></th>
+            <th class="task-cell">Task</th>
+            <th class="priority-cell">Priority</th>
+            <th class="delete-cell">Delete</th>
+          </thead>
+          <tbody id="list-table">
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </body>
 </html>
