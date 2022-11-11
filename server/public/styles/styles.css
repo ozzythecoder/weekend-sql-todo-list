@@ -61,6 +61,19 @@ td {
   width: 30px;
 }
 
+td.task-cell {
+  width: 200px;
+  text-align: left;
+}
+
+.priority-cell {
+  width: 25%;
+}
+
+.delete-cell {
+  width: 15%;
+}
+
 tr.completed-row {
   text-decoration: line-through;
   text-decoration-color: green;
