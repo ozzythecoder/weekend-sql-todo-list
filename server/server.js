@@ -64,9 +64,9 @@ app.post('/tasks', (req, res) => {
 app.put('/tasks/:id', (req, res) => {
   const id = req.params.id;
   const queryText = `
-  UPDATE tasks
-    SET completed = TRUE
-    WHERE id = $1;`
+    UPDATE tasks
+      SET completed = TRUE
+      WHERE id = $1;`
 
   pool.query(queryText, [id])
     .then( (result) => {
@@ -77,6 +77,26 @@ app.put('/tasks/:id', (req, res) => {
       console.log('PUT QUERY error:', error);
       res.sendStatus(500);
     })
+})
+
+app.delete('/tasks/:id', (req, res) => {
+  const id = req.params.id
+  const queryText = `
+    DELETE FROM tasks
+      WHERE id = $1;
+  `
+
+  pool.query(queryText, [id])
+    .then( (result) => {
+      console.log('DELETE QUERY successful');
+      res.sendStatus(200);
+    })
+    .catch( (error) => {
+      console.log('error in DELETE query');
+      console.log(error);
+      res.sendStatus(500);
+    })
+
 })
 
 app.listen(PORT, () => {
