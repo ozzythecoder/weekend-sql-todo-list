@@ -30,7 +30,7 @@ function renderTasks(tasks) {
   for (let task of tasks) {
     let complete = task.completed;
     let id = task.id;
-    let disableButton = (complete ? 'disabled' : '')
+    let disableButton = (complete ? 'disabled' : '') // if task is complete, disable the button
 
     listTable.append(`
       <tr>
@@ -66,10 +66,7 @@ function addTask() {
     completed: false
   }
   
-  if (task.name == '' || task.priority == '') {
-    alert('All fields are required.')
-    return false;
-  }
+  if ( !validateInput(task) ) { return false } // abort mission if input is invalid
 
   $.ajax({
     method: 'POST',
@@ -88,10 +85,17 @@ function addTask() {
   emptyInputs();
 } // end addTask()
 
+function validateInput(task) {
+  
+  if (task.name == '' || task.priority == '') {
+    alert('All fields are required.')
+    return false;
+  }
+
+  return true;
+}
+
 function completeTask() {
-  let completed = $( this ).data('completed')
-  console.log(completed);
-  // if (completed) { return false }; // prevent completed task 
   let id = $( this ).data('id')
 
   $.ajax({
