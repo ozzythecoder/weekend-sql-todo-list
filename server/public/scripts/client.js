@@ -26,16 +26,18 @@ function renderTasks(tasks) {
   clearTable();
 
   let listTable = $( '#list-table' )
-  const completedTaskButton = {
-    true: "completed",
-    false: ""
-  }
 
   for (let task of tasks) {
-    console.log(task);
+    let complete = task.completed;
+    let id = task.id;
+    let disableButton = (complete ? 'disabled' : '')
+
     listTable.append(`
       <tr>
-        <td><button class="complete-task-btn ${completedTaskButton[task.completed]}" data-id="${task.id}">&#10003;</button></td>
+        <td><button class="complete-task-btn"
+          data-completed="${complete}"
+          data-id="${id}"
+          ${disableButton}>&#10003;</button></td>
         <td>${task.task_name}</td>
         <td>${task.priority}</td>
       </tr>
@@ -49,6 +51,10 @@ function clearTable() { $( '#list-table ').empty() };
 function getEventListeners() {
   $( '#submit-task-btn' ).on('click', addTask)
   $( '#list-table' ).on('click', '.complete-task-btn', completeTask)
+  $( '#test-btn' ).on('click', function() {
+    console.log('bruh');
+    $( this ).prop('disabled', true);
+  })
 }
 
 function addTask() {
@@ -83,6 +89,9 @@ function addTask() {
 } // end addTask()
 
 function completeTask() {
+  let completed = $( this ).data('completed')
+  console.log(completed);
+  // if (completed) { return false }; // prevent completed task 
   let id = $( this ).data('id')
 
   $.ajax({
