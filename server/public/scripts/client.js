@@ -26,9 +26,15 @@ function renderTasks(tasks) {
   clearTable();
 
   let listTable = $( '#list-table' )
+  let priorityText = {
+    '1': 'High',
+    '2': 'Medium',
+    '3': 'Low'
+  };
 
   for (let task of tasks) {
     let complete = task.completed;
+    let priority = task.priority;
     let id = task.id;
     let disableButton = (complete ? 'disabled' : '') // if task is complete, disable the button
 
@@ -39,7 +45,7 @@ function renderTasks(tasks) {
           data-id="${id}"
           ${disableButton}>&#10003;</button></td>
         <td>${task.task_name}</td>
-        <td>${task.priority}</td>
+        <td>${priorityText[priority]}</td>
         <td><button class="delete-task-btn"
           data-id="${id}">Delete</button></td>
       </tr>
@@ -66,10 +72,10 @@ function addTask() {
 
   const task = {
     name: $( '#task-name-in' ).val(),
-    priority: $( '#priority-in' ).val(),
+    priority: $( '#priority-in option:selected' ).val(),
     completed: false
   }
-  
+
   if ( !validateInput(task) ) { return false } // abort mission if input is invalid
 
   $.ajax({
@@ -118,7 +124,7 @@ function completeTask() {
 
 function emptyInputs() {
   $( '#task-name-in' ).val('')
-  $( '#priority-in' ).val('Priority')
+  $( '#priority-in option[value=""]' ).prop('selected', true) // resets dropdown to ghost option
 }
 
 function deleteTask() {

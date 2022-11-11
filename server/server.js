@@ -50,6 +50,7 @@ app.post('/tasks', (req, res) => {
   VALUES
     ($1, $2, $3);`
 
+  console.log(req.body);
   pool.query(queryText, [task.name, task.priority, task.completed])
     .then( (response) => {
       console.log('task added successfully');
@@ -57,6 +58,7 @@ app.post('/tasks', (req, res) => {
     })
     .catch( (error) => {
       console.log('error in POST query');
+      console.log(error);
       res.sendStatus(500);
     })
 })
