@@ -33,7 +33,7 @@ function renderTasks(tasks) {
     let disableButton = (complete ? 'disabled' : '') // if task is complete, disable the button
 
     listTable.append(`
-      <tr>
+      <tr class="${complete ? 'completed-row' : ''}">
         <td><button class="complete-task-btn"
           data-completed="${complete}"
           data-id="${id}"
