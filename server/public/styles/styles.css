@@ -1,0 +1,10 @@
+.complete-task-btn {
+  background-color: white;
+  border: 1px solid black;
+  filter: drop-shadow(2px 2px 2px rgb(0, 0, 0, 0.7))
+}
+
+.completed {
+  background-color: green;
+  color: white;
+}

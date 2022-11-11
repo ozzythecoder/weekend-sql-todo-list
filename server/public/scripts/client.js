@@ -26,12 +26,16 @@ function renderTasks(tasks) {
   clearTable();
 
   let listTable = $( '#list-table' )
+  const completedTaskButton = {
+    true: "completed",
+    false: ""
+  }
 
   for (let task of tasks) {
     console.log(task);
     listTable.append(`
       <tr>
-        <td><button class="complete-task-btn" data-id="${task.id}">&#10003;</button></td>
+        <td><button class="complete-task-btn ${completedTaskButton[task.completed]}" data-id="${task.id}">&#10003;</button></td>
         <td>${task.task_name}</td>
         <td>${task.priority}</td>
       </tr>
