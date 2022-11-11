@@ -27,7 +27,7 @@ pool.on('error', (error) => {
 
 // end pg / pool
 
-app.get('/db', (req, res) => {
+app.get('/tasks', (req, res) => {
 
   const queryText = `SELECT * FROM tasks`;
 

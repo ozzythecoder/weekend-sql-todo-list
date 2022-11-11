@@ -2,7 +2,39 @@ $( document ).ready(onReady)
 
 function onReady() {
   console.log('jQ');
+
   getEventListeners();
+  getTasks();
+}
+
+function getTasks() {
+
+  $.ajax({
+    method: 'GET',
+    url: 'tasks'
+  })
+  .then(function (response) {
+    renderTasks(response);
+    console.log('GET query successful');
+  })
+  .catch(function (error) {
+    console.log('error in AJAX GET:', error);
+  })
+}
+
+function renderTasks(tasks) {
+  let listTable = $( '#list-table' )
+
+  for (let task of tasks) {
+    listTable.append(`
+      <tr>
+        <td><button class="complete-task" data-id="${task.id}">&#10003;</button></td>
+        <td>${task.name}</td>
+        <td>${task.priority}</td>
+      </tr>
+    `)
+  }
+
 }
 
 function getEventListeners() {
@@ -18,8 +50,13 @@ function addTask() {
     completed: false
   }
   
-  emptyInputs();
+  if (task.name == '' || task.priority == '') {
+    alert('All fields are required.')
+    return false;
+  }
+
   console.log(task);
+  emptyInputs();
 }
 
 function emptyInputs() {
