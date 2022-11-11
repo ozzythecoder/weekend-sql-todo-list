@@ -47,6 +47,10 @@ button:active:not(button:disabled) {
   cursor: default;
 }
 
+.invisible {
+  visibility: hidden;
+}
+
 table {
   margin: 10px auto;
   max-width: 60%;

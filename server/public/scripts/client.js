@@ -25,6 +25,12 @@ function getTasks() {
 function renderTasks(tasks) {
   clearTable();
 
+  if (Object.keys(tasks).length == 0) {
+    $( '#task-list' ).addClass('invisible')
+  } else {
+    $( '#task-list' ).removeClass('invisible')
+  } 
+
   let listTable = $( '#list-table' )
   let priorityText = {
     '1': 'High',
