@@ -36,14 +36,15 @@ function renderTasks(tasks) {
     let complete = task.completed;
     let priority = task.priority;
     let id = task.id;
-    let disableButton = (complete ? 'disabled' : '') // if task is complete, disable the button
 
     listTable.append(`
       <tr class="${complete ? 'completed-row' : ''}">
         <td><button class="complete-task-btn"
           data-completed="${complete}"
           data-id="${id}"
-          ${disableButton}>&#10003;</button></td>
+          ${complete ? 'disabled' : ''}>
+            &#10003;
+          </button></td>
         <td>${task.task_name}</td>
         <td>${priorityText[priority]}</td>
         <td><button class="delete-task-btn"
