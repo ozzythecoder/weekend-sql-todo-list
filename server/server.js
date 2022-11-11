@@ -29,7 +29,7 @@ pool.on('error', (error) => {
 
 app.get('/tasks', (req, res) => {
 
-  const queryText = `SELECT * FROM tasks`;
+  const queryText = `SELECT * FROM tasks ORDER BY priority DESC`;
 
   pool.query(queryText)
     .then( (result) => {
@@ -57,6 +57,24 @@ app.post('/tasks', (req, res) => {
     })
     .catch( (error) => {
       console.log('error in POST query');
+      res.sendStatus(500);
+    })
+})
+
+app.put('/tasks/:id', (req, res) => {
+  const id = req.params.id;
+  const queryText = `
+  UPDATE tasks
+    SET completed = TRUE
+    WHERE id = $1;`
+
+  pool.query(queryText, [id])
+    .then( (result) => {
+      console.log('PUT QUERY successful');
+      res.sendStatus(200);
+    })
+    .catch( (error) => {
+      console.log('PUT QUERY error:', error);
       res.sendStatus(500);
     })
 })

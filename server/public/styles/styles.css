@@ -1,0 +1,26 @@
+button {
+  background-color: white;
+  border: 1px solid black;
+  filter: drop-shadow(2px 2px 2px rgb(0, 0, 0, 0.7));
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+button:active:not(button:disabled) {
+  background-color: black;
+  color: white;
+  filter: none;
+  position: relative;
+  top: 1px;
+  left: 1px;
+}
+
+/* Represents completed tasks */
+.complete-task-btn:disabled {
+  background-color: green;
+  color: white;
+  cursor: default;
+}
