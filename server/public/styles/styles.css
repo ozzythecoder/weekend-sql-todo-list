@@ -24,3 +24,9 @@ button:active:not(button:disabled) {
   color: white;
   cursor: default;
 }
+
+tr.completed-row {
+  text-decoration: line-through;
+  text-decoration-color: green;
+  text-decoration-thickness: 2px;
+}
