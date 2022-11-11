@@ -40,6 +40,8 @@ function renderTasks(tasks) {
           ${disableButton}>&#10003;</button></td>
         <td>${task.task_name}</td>
         <td>${task.priority}</td>
+        <td><button class="delete-task-btn"
+          data-id="${id}">Delete</button></td>
       </tr>
     `)
   }
@@ -51,6 +53,8 @@ function clearTable() { $( '#list-table ').empty() };
 function getEventListeners() {
   $( '#submit-task-btn' ).on('click', addTask)
   $( '#list-table' ).on('click', '.complete-task-btn', completeTask)
+  $( '#list-table' ).on('click', '.delete-task-btn', deleteTask)
+
   $( '#test-btn' ).on('click', function() {
     console.log('bruh');
     $( this ).prop('disabled', true);
@@ -97,7 +101,7 @@ function validateInput(task) {
 
 function completeTask() {
   let id = $( this ).data('id')
-
+  
   $.ajax({
     method: 'PUT',
     url: '/tasks/' + id
@@ -115,4 +119,10 @@ function completeTask() {
 function emptyInputs() {
   $( '#task-name-in' ).val('')
   $( '#priority-in' ).val('Priority')
+}
+
+function deleteTask() {
+  let id = $( this ).data('id')
+
+  console.log('in delete task for task with id', id);
 }
