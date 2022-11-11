@@ -2,20 +2,27 @@ $( document ).ready(onReady)
 
 function onReady() {
   console.log('jQ');
-  getTest();
+  getEventListeners();
 }
 
-function getTest() {
+function getEventListeners() {
+  $( '#submit-task-btn' ).on('click', addTask)
+}
 
-  $.ajax({
-    method: 'GET',
-    url: '/db'
-  })
-  .then( (res) => {
-    console.log(res);
-  })
-  .catch( (err) => {
-    console.log('epic fail.');
-  })
+function addTask() {
+  console.log('in addtask');
 
+  const task = {
+    name: $( '#task-name-in' ).val(),
+    priority: $( '#priority-in' ).val(),
+    completed: false
+  }
+  
+  emptyInputs();
+  console.log(task);
+}
+
+function emptyInputs() {
+  $( '#task-name-in' ).val('')
+  $( '#priority-in' ).val('Priority')
 }

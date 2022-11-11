@@ -7,9 +7,18 @@
   <script src="./vendors/jquery.js"></script>
   <script src="./scripts/client.js"></script>
   <link href="./styles/styles.css" rel="stylesheet" />
-  <title>Document</title>
+  <title>The Completionator</title>
 </head>
 <body>
-  
+  <h1>The Completionator</h1>
+  <p>Let's get some tasks done</p>
+  <input type="text" id="task-name-in" placeholder="Task Name" />
+  <select id="priority-in">
+    <option val="" selected disabled hidden>Priority</option>
+    <option val="high">High</option>
+    <option val="medium">Medium</option>
+    <option val="low">Low</option>
+  </select>
+  <button id="submit-task-btn">Add Task</button>
 </body>
 </html>
