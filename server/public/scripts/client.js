@@ -27,9 +27,9 @@ function renderTasks(tasks) {
 
   let listTable = $( '#list-table' )
   let priorityText = {
-    1: 'High',
-    2: 'Medium',
-    3: 'Low'
+    '1': 'High',
+    '2': 'Medium',
+    '3': 'Low'
   };
 
   for (let task of tasks) {
@@ -72,10 +72,10 @@ function addTask() {
 
   const task = {
     name: $( '#task-name-in' ).val(),
-    priority: $( '#priority-in' ).val(),
+    priority: $( '#priority-in option:selected' ).val(),
     completed: false
   }
-  
+
   if ( !validateInput(task) ) { return false } // abort mission if input is invalid
 
   $.ajax({
@@ -124,7 +124,7 @@ function completeTask() {
 
 function emptyInputs() {
   $( '#task-name-in' ).val('')
-  $( '#priority-in' ).val('Priority')
+  $( '#priority-in option[value=""]' ).prop('selected', true) // resets dropdown to ghost option
 }
 
 function deleteTask() {
