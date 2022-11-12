@@ -55,7 +55,7 @@ function renderTasks(tasks) {
             </button>
         </td>
         <td class="task-cell">
-          <span class="cell-text ${strike}">${task.task_name}</span>
+          <span class="cell-text ${complete ? 'completed-task' : ''}">${task.task_name}</span>
         </td>
         <td class="priority-cell">
           <span class="cell-text">${priorityText[priority]}</span>
@@ -65,6 +65,9 @@ function renderTasks(tasks) {
       </tr>
     `)
   }
+
+  // strike animation for completed task
+  setTimeout( () => { $( '.cell-text.completed-task' ).addClass('strike') }, 50);
 
 } // end renderTasks()
 
