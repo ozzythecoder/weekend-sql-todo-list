@@ -29,7 +29,7 @@ pool.on('error', (error) => {
 
 app.get('/tasks', (req, res) => {
 
-  const queryText = `SELECT * FROM tasks ORDER BY priority DESC`;
+  const queryText = `SELECT * FROM tasks ORDER BY priority`;
 
   pool.query(queryText)
     .then( (result) => {

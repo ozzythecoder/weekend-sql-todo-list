@@ -42,18 +42,24 @@ function renderTasks(tasks) {
     let complete = task.completed;
     let priority = task.priority;
     let id = task.id;
+    let strike = (complete ? 'strike' : '');
 
     listTable.append(`
       <tr class="${complete ? 'completed-row' : ''}">
         <td class="complete-cell">
-        <button class="complete-task-btn"
-          data-completed="${complete}"
-          data-id="${id}"
-          ${complete ? 'disabled' : ''}>
-            &#10003;
-          </button></td>
-        <td class="task-cell">${task.task_name}</td>
-        <td class="priority-cell">${priorityText[priority]}</td>
+          <button class="complete-task-btn"
+            data-completed="${complete}"
+            data-id="${id}"
+            ${complete ? 'disabled' : ''}>
+              &#10003;
+            </button>
+        </td>
+        <td class="task-cell">
+          <span class="cell-text ${strike}">${task.task_name}</span>
+        </td>
+        <td class="priority-cell">
+          <span class="cell-text">${priorityText[priority]}</span>
+        </td>
         <td class="delete-cell"><button class="delete-task-btn"
           data-id="${id}">Delete</button></td>
       </tr>
@@ -68,6 +74,10 @@ function getEventListeners() {
   $( '#submit-task-btn' ).on('click', addTask)
   $( '#list-table' ).on('click', '.complete-task-btn', completeTask)
   $( '#list-table' ).on('click', '.delete-task-btn', deleteTask)
+
+  $( '#strike-h3' ).on('click', function() {
+    $( 'h3.heading-text' ).addClass('strikeyboy');
+  })
 
   $( '#test-btn' ).on('click', function() {
     console.log('bruh');
