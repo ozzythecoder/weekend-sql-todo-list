@@ -45,7 +45,7 @@ function renderTasks(tasks) {
     let strike = (complete ? 'strike' : '');
 
     listTable.append(`
-      <tr class="${complete ? 'completed-row' : ''}">
+      <tr class="${complete ? 'completed-row' : ''}" data-id="${id}">
         <td class="complete-cell">
           <button class="complete-task-btn"
             data-completed="${complete}"
@@ -67,7 +67,7 @@ function renderTasks(tasks) {
   }
 
   // strike animation for completed task
-  setTimeout( () => { $( '.cell-text.completed-task' ).addClass('strike') }, 50);
+  setTimeout( () => { $( '.cell-text.completed-task' ).addClass('strike') }, 200);
 
 } // end renderTasks()
 
@@ -77,15 +77,6 @@ function getEventListeners() {
   $( '#submit-task-btn' ).on('click', addTask)
   $( '#list-table' ).on('click', '.complete-task-btn', completeTask)
   $( '#list-table' ).on('click', '.delete-task-btn', deleteTask)
-
-  $( '#strike-h3' ).on('click', function() {
-    $( 'h3.heading-text' ).addClass('strikeyboy');
-  })
-
-  $( '#test-btn' ).on('click', function() {
-    console.log('bruh');
-    $( this ).prop('disabled', true);
-  })
 }
 
 function addTask() {
