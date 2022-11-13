@@ -25,6 +25,12 @@ function getTasks() {
 function renderTasks(tasks) {
   clearTable();
 
+  if (Object.keys(tasks).length == 0) {
+    $( '#task-list' ).addClass('invisible')
+  } else {
+    $( '#task-list' ).removeClass('invisible')
+  } 
+
   let listTable = $( '#list-table' )
   let priorityText = {
     '1': 'High',
@@ -36,23 +42,32 @@ function renderTasks(tasks) {
     let complete = task.completed;
     let priority = task.priority;
     let id = task.id;
+    let strike = (complete ? 'strike' : '');
 
     listTable.append(`
-      <tr class="${complete ? 'completed-row' : ''}">
+      <tr class="${complete ? 'completed-row' : ''}" data-id="${id}">
         <td class="complete-cell">
-        <button class="complete-task-btn"
-          data-completed="${complete}"
-          data-id="${id}"
-          ${complete ? 'disabled' : ''}>
-            &#10003;
-          </button></td>
-        <td class="task-cell">${task.task_name}</td>
-        <td class="priority-cell">${priorityText[priority]}</td>
+          <button class="complete-task-btn"
+            data-completed="${complete}"
+            data-id="${id}"
+            ${complete ? 'disabled' : ''}>
+              &#10003;
+            </button>
+        </td>
+        <td class="task-cell">
+          <span class="cell-text ${complete ? 'completed-task' : ''}">${task.task_name}</span>
+        </td>
+        <td class="priority-cell">
+          <span class="cell-text">${priorityText[priority]}</span>
+        </td>
         <td class="delete-cell"><button class="delete-task-btn"
           data-id="${id}">Delete</button></td>
       </tr>
     `)
   }
+
+  // strike animation for completed task
+  setTimeout( () => { $( '.cell-text.completed-task' ).addClass('strike') }, 200);
 
 } // end renderTasks()
 
@@ -62,11 +77,6 @@ function getEventListeners() {
   $( '#submit-task-btn' ).on('click', addTask)
   $( '#list-table' ).on('click', '.complete-task-btn', completeTask)
   $( '#list-table' ).on('click', '.delete-task-btn', deleteTask)
-
-  $( '#test-btn' ).on('click', function() {
-    console.log('bruh');
-    $( this ).prop('disabled', true);
-  })
 }
 
 function addTask() {

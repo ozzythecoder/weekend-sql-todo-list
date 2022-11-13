@@ -20,6 +20,28 @@ body, h1, h2, h3, p {
   padding: 10px;
 }
 
+.cell-text {
+  position: relative;
+  display: inline-block;
+  transition: all 0.25s cubic-bezier(1, 0, 0, 1);
+}
+
+.cell-text::before {
+  position: absolute;
+  content: '';
+  width: 0;
+  height: 2px;
+  top: calc(50% - 1px);
+  right: 0;
+  background: black;
+  transition: inherit;
+}
+
+.cell-text.strike::before {
+  left: 0;
+  width: 100%;
+}
+
 button {
   background-color: white;
   border: 1px solid black;
@@ -46,6 +68,12 @@ button:active:not(button:disabled) {
   color: white;
   cursor: default;
 }
+
+.invisible {
+  visibility: hidden;
+}
+
+
 
 table {
   margin: 10px auto;
@@ -79,3 +107,4 @@ tr.completed-row {
   text-decoration-color: green;
   text-decoration-thickness: 2px;
 }
+
