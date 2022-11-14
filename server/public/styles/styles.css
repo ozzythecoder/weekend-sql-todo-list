@@ -16,9 +16,10 @@ body, h1, h2, h3, p {
 }
 
 #content {
+  position: relative;
   margin: 0 10%;
   padding: 20px;
-  border: 1px solid black;
+  border: 1px solid gray;
   height: 100%;
   min-height: 50%;
   background-color: rgb(255, 255, 255, 0.6);
@@ -36,9 +37,9 @@ body, h1, h2, h3, p {
 }
 
 select {
-  width: 150px;
   height: 36px;
   margin: 5px;
+  padding-left: 8px;
   border: 1px solid rgb(0, 0, 0, 0.4);
   border-radius: 8px;
   font-size: 18px;
@@ -50,14 +51,22 @@ option:disabled {
 }
 
 #submit-task-btn {
+  width: 120px;
   height: 32px;
   font-size: 18px;
+  font-weight: 700;
   margin: 5px;
   filter: drop-shadow(2px 2px 2px rgb(0, 0, 0, 0.7));
 }
 
 .heading-text {
   padding: 10px;
+}
+
+.subheading {
+  position: absolute;
+  top: 40px;
+  right: 30px;
 }
 
 #add-task-form {
@@ -87,10 +96,14 @@ option:disabled {
 }
 
 button {
-  background-color: white;
+  background-color: rgb(228, 228, 228);
   border: 1px solid black;
   filter: drop-shadow(2px 2px 2px rgb(0, 0, 0, 0.4));
   cursor: pointer;
+}
+
+button:hover {
+  background-color: white;
 }
 
 button:disabled {
@@ -116,8 +129,6 @@ button:active:not(button:disabled) {
 .invisible {
   visibility: hidden;
 }
-
-
 
 table {
   margin: 10px auto;
