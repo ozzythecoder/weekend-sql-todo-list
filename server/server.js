@@ -9,13 +9,27 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // pg / pool
 const pg = require('pg');
 const Pool = pg.Pool
-const pool = new Pool({
-  database: 'weekend-to-do-app', // name of database
-  host: 'localhost', // database server
-  port: 5432, // Postgres default
-  max: 10, // max queries at once
-  idleTimeoutMillis: 30000 // 30 seconds to try to connect before cancelling query
-});
+let pool;
+
+if (process.env.DATABASE_URL) {
+	pool = new Pool({
+		connectionString: process.env.DATABASE_URL,
+		ssl: { rejectUnauthorized: false }
+	})
+} else {
+  pool = new Pool({
+    database: 'weekend-to-do-app',
+    host: 'localhost',
+    port: 5432
+  })
+}
+// const pool = new Pool({
+//   database: 'weekend-to-do-app', // name of database
+//   host: 'localhost', // database server
+//   port: 5432, // Postgres default
+//   max: 10, // max queries at once
+//   idleTimeoutMillis: 30000 // 30 seconds to try to connect before cancelling query
+// });
 
 pool.on('connect', () => {
   console.log('postgresql is connected!');
